@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BackupSetting.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BackupFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProcessName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ts3client_win64</Value>
+    </Setting>
+    <Setting Name="AutomationName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TeamSpeak 3</Value>
+    </Setting>
+    <Setting Name="AutomationIdentitiesShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">^i</Value>
+    </Setting>
+    <Setting Name="AutomationExport" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Export</Value>
+    </Setting>
+    <Setting Name="AutomationImport" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Import</Value>
+    </Setting>
+    <Setting Name="AutomationIdentities" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Identities</Value>
+    </Setting>
+    <Setting Name="AutomationWarning" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Warning</Value>
+    </Setting>
+    <Setting Name="AutomationWarningYes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Enter</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
