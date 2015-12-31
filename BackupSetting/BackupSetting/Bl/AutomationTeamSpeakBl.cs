@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -17,11 +16,7 @@ namespace BackupSetting.Bl
 
         private readonly string _appPath;
         private readonly ILogEngine _logEngine;
-        private enum Direction
-        {
-            Export,
-            Import
-        }
+        private readonly AppSettingBl _appSettingBl;
 
         #endregion
 
@@ -31,6 +26,7 @@ namespace BackupSetting.Bl
         {
             _appPath = appPath;
             _logEngine = logEngine;
+            _appSettingBl = AppSettingBl.GetInstance();
         }
 
         #endregion
@@ -44,7 +40,7 @@ namespace BackupSetting.Bl
 
         public void RestartTeamSpeak()
         {
-            var process = Process.GetProcessesByName(Settings.Default.ProcessName);
+            var process = Process.GetProcessesByName(_appSettingBl.ProcessName);
             if (process.Any())
             {
                 foreach (var p in process)
@@ -52,7 +48,7 @@ namespace BackupSetting.Bl
                     p.Kill();
                 }
             }
-            Process.Start(Path.Combine(_appPath, $"{Settings.Default.ProcessName}.exe"));
+            Process.Start(Path.Combine(_appPath, $"{_appSettingBl.ProcessName}.exe"));
 
             Thread.Sleep(1000);
         }
@@ -91,15 +87,15 @@ namespace BackupSetting.Bl
             // Load dialogbox in memory
             root.FindAll(TreeScope.Subtree, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window));
 
-            root = root?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.NameProperty, Resource.ExportIdentity));
+            root = root.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.NameProperty, Resources.ExportIdentity));
             EnterDirectoryName(root, fileName);
-            var elBt = root?.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty, Resource.Save));
+            var elBt = root?.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty, Resources.Save));
             ClickOnButton(elBt);
         }
 
         private void DisplayIdentitiesDialogBox(Direction direction, AutomationElement root)
         {
-            var dialogBox = root?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.NameProperty, Settings.Default.AutomationIdentities));
+            var dialogBox = root?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.NameProperty, Resources.AutomationIdentities));
             var lst = dialogBox?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.List));
             if (lst != null)
             {
@@ -110,7 +106,7 @@ namespace BackupSetting.Bl
                 {
                     ClickOnButton(profile);
 
-                    var btName = direction == Direction.Export ? Settings.Default.AutomationExport : Settings.Default.AutomationImport;
+                    var btName = direction == Direction.Export ? Resources.AutomationExport : Resources.AutomationImport;
                     elBt = dialogBox.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.NameProperty, btName));
                     if (elBt == null)
                     {
@@ -125,22 +121,16 @@ namespace BackupSetting.Bl
                 }
 
                 //Close
-                elBt = dialogBox?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.NameProperty, Resource.AutomationOk));
+                elBt = dialogBox.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.NameProperty, Resources.AutomationOk));
                 ClickOnButton(elBt);
             }
         }
 
         private void EnterDirectoryName(AutomationElement root, string profileName)
         {
-            var el = root?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.AutomationIdProperty, Resource.AutomationFileNameId));
+            var el = root?.FindFirst(TreeScope.Subtree, new PropertyCondition(AutomationElement.AutomationIdProperty, Resources.AutomationFileNameId));
             var valuePattern = el?.GetCurrentPattern(ValuePattern.Pattern) as ValuePattern;
             valuePattern?.SetValue(profileName);
-        }
-
-        private static string GetFileName(string profileName)
-        {
-            var fileName = Path.Combine(Settings.Default.BackupFolder, $"{profileName}.ini");
-            return fileName;
         }
 
         private AutomationElement FocusOnTeamSpeak()
@@ -151,7 +141,7 @@ namespace BackupSetting.Bl
                 root = AutomationElement.RootElement.FindFirst(TreeScope.Children,
                                                                new PropertyCondition(
                                                                    AutomationElement.NameProperty,
-                                                                   Settings.Default.AutomationName));
+                                                                   Resources.AutomationName));
                 if (root == null)
                 {
                     _logEngine.WriteLog("Impossible to detect Team Speak 3. We try to launch it.");
@@ -168,13 +158,19 @@ namespace BackupSetting.Bl
                 Thread.Sleep(500);
 
                 // Display Identities dialogbox
-                SendKeys.SendWait(Settings.Default.AutomationIdentitiesShortcut);
+                SendKeys.SendWait(Resources.AutomationIdentitiesShortcut);
             }
             catch (Exception ex)
             {
                 _logEngine.WriteLog(ex.Message);
             }
             return root;
+        }
+
+        private string GetFileName(string profileName)
+        {
+            var fileName = Path.Combine(_appSettingBl.BackupFolder, $"{profileName}.ini");
+            return fileName;
         }
 
         /// <summary>
@@ -184,17 +180,23 @@ namespace BackupSetting.Bl
         private void SkipWarning(AutomationElement el)
         {
             var warning = el.FindFirst(TreeScope.Subtree,
-                                       new PropertyCondition(AutomationElement.NameProperty, Settings.Default.AutomationWarning));
+                                       new PropertyCondition(AutomationElement.NameProperty, Resources.AutomationWarning));
             if (warning != null)
             {
                 var elBts = warning.FindAll(TreeScope.Subtree, Condition.TrueCondition);
                 var elBt = elBts.Cast<AutomationElement>()
-                    .FirstOrDefault(f => f.Current.Name.Contains(Settings.Default.AutomationWarningYes));
+                    .FirstOrDefault(f => f.Current.Name.Contains(Resources.AutomationWarningYes));
 
                 ClickOnButton(elBt);
             }
         }
 
         #endregion
+
+        private enum Direction
+        {
+            Export,
+            Import
+        }
     }
 }

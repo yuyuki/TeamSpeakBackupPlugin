@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,9 +13,9 @@ namespace BackupSetting
     {
         #region Member
 
-        private readonly string _appPath;
         private readonly AutomationTeamSpeakBl _automationBL;
         private readonly string _configPath;
+        private readonly AppSettingBl _appSettingBl;
 
         #endregion
 
@@ -23,14 +24,15 @@ namespace BackupSetting
         public Form1()
         {
             var args = Environment.GetCommandLineArgs();
-            _appPath = FormatPath(args.Skip(1).FirstOrDefault());
+            var appPath = FormatPath(args.Skip(1).FirstOrDefault());
             _configPath = FormatPath(args.Skip(2).FirstOrDefault());
 
-            _automationBL = new AutomationTeamSpeakBl(this, _appPath);
+            _automationBL = new AutomationTeamSpeakBl(this, appPath);
+            _appSettingBl = AppSettingBl.GetInstance();
 
             InitializeComponent();
             WriteLog($"configPath : {_configPath}");
-            WriteLog($"appPath : {_appPath}");
+            WriteLog($"appPath : {appPath}");
             RestoreSetting();
         }
 
@@ -53,13 +55,13 @@ namespace BackupSetting
 
         private void ActivateButton()
         {
-            btBackup.Enabled = btRestore.Enabled = Directory.Exists(Settings.Default.BackupFolder);
+            btBackup.Enabled = btRestore.Enabled = Directory.Exists(_appSettingBl.BackupFolder);
         }
 
 
         private void btBackup_Click(object sender, EventArgs e)
         {
-            CopyTo(_configPath, Settings.Default.BackupFolder);
+            CopyTo(_configPath, _appSettingBl.BackupFolder);
             _automationBL.ExportIdentities();
         }
 
@@ -81,7 +83,7 @@ namespace BackupSetting
 
         private void btRestore_Click(object sender, EventArgs e)
         {
-            CopyTo(Settings.Default.BackupFolder, _configPath);
+            CopyTo(_appSettingBl.BackupFolder, _configPath);
             _automationBL.RestartTeamSpeak();
         }
 
@@ -133,20 +135,20 @@ namespace BackupSetting
             return path;
         }
 
-
         private void RestoreSetting()
         {
-            txtDestinationFolder.Text = Settings.Default.BackupFolder;
-            txtProcessName.Text = Settings.Default.ProcessName;
+            txtDestinationFolder.Text = _appSettingBl.BackupFolder;
+            txtProcessName.Text = _appSettingBl.ProcessName;
             ActivateButton();
         }
 
         private void SaveSetting()
         {
-            Settings.Default.BackupFolder = CreateDirectory(txtDestinationFolder.Text);
-            Settings.Default.ProcessName = txtProcessName.Text;
-            Settings.Default.Save();
-            txtDestinationFolder.Text = Settings.Default.BackupFolder;
+            _appSettingBl.BackupFolder = CreateDirectory(txtDestinationFolder.Text);
+            _appSettingBl.ProcessName = txtProcessName.Text;
+            _appSettingBl.Save();
+
+            txtDestinationFolder.Text = _appSettingBl.BackupFolder;
 
             ActivateButton();
         }

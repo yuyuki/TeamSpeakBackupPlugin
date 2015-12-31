@@ -61,11 +61,120 @@ namespace BackupSetting.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string AutomationExport {
+            get {
+                return ResourceManager.GetString("AutomationExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1001.
+        /// </summary>
+        internal static string AutomationFileNameId {
+            get {
+                return ResourceManager.GetString("AutomationFileNameId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identities.
+        /// </summary>
+        internal static string AutomationIdentities {
+            get {
+                return ResourceManager.GetString("AutomationIdentities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ^i.
+        /// </summary>
+        internal static string AutomationIdentitiesShortcut {
+            get {
+                return ResourceManager.GetString("AutomationIdentitiesShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string AutomationImport {
+            get {
+                return ResourceManager.GetString("AutomationImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TeamSpeak 3.
+        /// </summary>
+        internal static string AutomationName {
+            get {
+                return ResourceManager.GetString("AutomationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK Enter.
+        /// </summary>
+        internal static string AutomationOk {
+            get {
+                return ResourceManager.GetString("AutomationOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        internal static string AutomationWarning {
+            get {
+                return ResourceManager.GetString("AutomationWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter.
+        /// </summary>
+        internal static string AutomationWarningYes {
+            get {
+                return ResourceManager.GetString("AutomationWarningYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose the destination folder for saving settings.
         /// </summary>
         internal static string BrowseBackupFolder_Description {
             get {
                 return ResourceManager.GetString("BrowseBackupFolder_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Identity.
+        /// </summary>
+        internal static string ExportIdentity {
+            get {
+                return ResourceManager.GetString("ExportIdentity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TeamSpeak {
+            get {
+                object obj = ResourceManager.GetObject("TeamSpeak", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

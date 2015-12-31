@@ -25,7 +25,7 @@ local trace = 0
 local function onMenuItemEvent(serverConnectionHandlerID, menuType, menuItemID, selectedItemID)
     local configPath = string.gsub(ts3.getConfigPath(), '\\', '\\\\')
     local appPath = string.gsub(ts3.getAppPath(), '\\', '\\\\')
-    local exePath = '"' .. ts3.getPluginPath() .. 'lua_plugin/backupts3/BackupSetting.exe" "' .. appPath .. '" "' .. configPath .. '"'
+    local exePath = '"' .. configPath .. 'BackupSetting\\BackupSetting.exe" "' .. appPath .. '" "' .. configPath .. '"'
     executeWinForm(exePath)
 end
 

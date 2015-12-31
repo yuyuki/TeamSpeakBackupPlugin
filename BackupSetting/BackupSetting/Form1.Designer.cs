@@ -36,13 +36,13 @@
             this.txtDestinationFolder = new System.Windows.Forms.TextBox();
             this.btSaveConfig = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtProcessName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btRestore = new System.Windows.Forms.Button();
             this.btBackup = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lstLog = new System.Windows.Forms.ListBox();
-            this.txtProcessName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -52,7 +52,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox1.Image = global::BackupSetting.Resource.TeamSpeak;
+            this.pictureBox1.Image = global::BackupSetting.Properties.Resources.TeamSpeak;
             this.pictureBox1.Location = new System.Drawing.Point(0, 263);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(610, 270);
@@ -114,6 +114,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Configuration";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Process Name";
+            // 
+            // txtProcessName
+            // 
+            this.txtProcessName.Location = new System.Drawing.Point(137, 44);
+            this.txtProcessName.Name = "txtProcessName";
+            this.txtProcessName.Size = new System.Drawing.Size(210, 22);
+            this.txtProcessName.TabIndex = 3;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btRestore);
@@ -171,22 +187,6 @@
             this.lstLog.Name = "lstLog";
             this.lstLog.Size = new System.Drawing.Size(604, 79);
             this.lstLog.TabIndex = 0;
-            // 
-            // txtProcessName
-            // 
-            this.txtProcessName.Location = new System.Drawing.Point(137, 44);
-            this.txtProcessName.Name = "txtProcessName";
-            this.txtProcessName.Size = new System.Drawing.Size(210, 22);
-            this.txtProcessName.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Process Name";
             // 
             // Form1
             // 
