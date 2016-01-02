@@ -26,6 +26,8 @@ namespace BackupSetting.Bl
             set { SetValue(nameof(ProcessName), value); }
         }
 
+        public string TeamSpeakPath { get; set; }
+
         #endregion
 
         #region Constructor
@@ -63,7 +65,7 @@ namespace BackupSetting.Bl
                 _config.AppSettings.Settings.Add(key, null);
             }
 
-            return _config.AppSettings.Settings[nameof(BackupFolder)].Value;
+            return _config.AppSettings.Settings[key].Value;
         }
 
         private void SetValue(string key, string value)

@@ -120,7 +120,7 @@
   <data name="AutomationExport" xml:space="preserve">
     <value>Export</value>
   </data>
-  <data name="AutomationFileNameId" xml:space="preserve">
+  <data name="AutomationFileNameExportId" xml:space="preserve">
     <value>1001</value>
   </data>
   <data name="AutomationIdentities" xml:space="preserve">
@@ -1016,5 +1016,26 @@
         GAFmUZS/AYAWZRlL8BgBZlK5S7AYAW4DAvwGAFmBXAuwGAFuBXArgVwAtwGBcAKYDAqAGAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z
 </value>
+  </data>
+  <data name="RestoreDone" xml:space="preserve">
+    <value>The restore is done.</value>
+  </data>
+  <data name="RestoreTitle" xml:space="preserve">
+    <value>Restore processing</value>
+  </data>
+  <data name="BackupDone" xml:space="preserve">
+    <value>The backup is done.</value>
+  </data>
+  <data name="BackupTitle" xml:space="preserve">
+    <value>Backup processing</value>
+  </data>
+  <data name="ImportIdentity" xml:space="preserve">
+    <value>Import Identity</value>
+  </data>
+  <data name="AutomationFileNameImportId" xml:space="preserve">
+    <value>1148</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
   </data>
 </root>

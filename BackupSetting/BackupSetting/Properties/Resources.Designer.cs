@@ -72,9 +72,18 @@ namespace BackupSetting.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 1001.
         /// </summary>
-        internal static string AutomationFileNameId {
+        internal static string AutomationFileNameExportId {
             get {
-                return ResourceManager.GetString("AutomationFileNameId", resourceCulture);
+                return ResourceManager.GetString("AutomationFileNameExportId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1148.
+        /// </summary>
+        internal static string AutomationFileNameImportId {
+            get {
+                return ResourceManager.GetString("AutomationFileNameImportId", resourceCulture);
             }
         }
         
@@ -142,6 +151,24 @@ namespace BackupSetting.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The backup is done..
+        /// </summary>
+        internal static string BackupDone {
+            get {
+                return ResourceManager.GetString("BackupDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup processing.
+        /// </summary>
+        internal static string BackupTitle {
+            get {
+                return ResourceManager.GetString("BackupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose the destination folder for saving settings.
         /// </summary>
         internal static string BrowseBackupFolder_Description {
@@ -156,6 +183,42 @@ namespace BackupSetting.Properties {
         internal static string ExportIdentity {
             get {
                 return ResourceManager.GetString("ExportIdentity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Identity.
+        /// </summary>
+        internal static string ImportIdentity {
+            get {
+                return ResourceManager.GetString("ImportIdentity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The restore is done..
+        /// </summary>
+        internal static string RestoreDone {
+            get {
+                return ResourceManager.GetString("RestoreDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore processing.
+        /// </summary>
+        internal static string RestoreTitle {
+            get {
+                return ResourceManager.GetString("RestoreTitle", resourceCulture);
             }
         }
         

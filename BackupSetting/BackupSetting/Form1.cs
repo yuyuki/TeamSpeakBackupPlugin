@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,9 +13,10 @@ namespace BackupSetting
     {
         #region Member
 
+        private readonly AppSettingBl _appSettingBl;
+
         private readonly AutomationTeamSpeakBl _automationBL;
         private readonly string _configPath;
-        private readonly AppSettingBl _appSettingBl;
 
         #endregion
 
@@ -23,16 +24,19 @@ namespace BackupSetting
 
         public Form1()
         {
-            var args = Environment.GetCommandLineArgs();
-            var appPath = FormatPath(args.Skip(1).FirstOrDefault());
-            _configPath = FormatPath(args.Skip(2).FirstOrDefault());
-
-            _automationBL = new AutomationTeamSpeakBl(this, appPath);
             _appSettingBl = AppSettingBl.GetInstance();
 
+            var args = Environment.GetCommandLineArgs();
+            _appSettingBl.TeamSpeakPath = FormatPath(args.Skip(1).FirstOrDefault());
+            _configPath = FormatPath(args.Skip(2).FirstOrDefault());
+
+            _automationBL = new AutomationTeamSpeakBl(this);
+
             InitializeComponent();
+
             WriteLog($"configPath : {_configPath}");
-            WriteLog($"appPath : {appPath}");
+            WriteLog($"appPath : {_appSettingBl.TeamSpeakPath}");
+
             RestoreSetting();
         }
 
@@ -63,6 +67,8 @@ namespace BackupSetting
         {
             CopyTo(_configPath, _appSettingBl.BackupFolder);
             _automationBL.ExportIdentities();
+            ExternBl.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
+            MessageBox.Show(this, Resources.BackupDone, Resources.BackupTitle);
         }
 
         private void btBrowseBackupFolder_Click(object sender, EventArgs e)
@@ -84,7 +90,9 @@ namespace BackupSetting
         private void btRestore_Click(object sender, EventArgs e)
         {
             CopyTo(_appSettingBl.BackupFolder, _configPath);
-            _automationBL.RestartTeamSpeak();
+            _automationBL.ImportIdentities();
+            ExternBl.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
+            MessageBox.Show(this, Resources.RestoreDone, Resources.RestoreTitle);
         }
 
         private void btSaveConfig_Click(object sender, EventArgs e)
